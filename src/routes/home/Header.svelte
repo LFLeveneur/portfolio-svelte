@@ -1,7 +1,7 @@
 <script>
 	import { page } from '$app/stores';
-	import logo from '$lib/images/svelte-logo.svg';
-	import github from '$lib/images/github.svg';
+	import logo from '$lib/assets/images/svelte-logo.svg';
+	import github from '$lib/assets/images/github.svg';
 </script>
 
 <header>
