@@ -1,6 +1,24 @@
 <script lang="ts">
+    import { onMount } from 'svelte';
     import { page } from '$app/stores';
     import logo from '$lib/assets/images/svelte-logo.svg';
+
+    let isMobileMenuOpen = false;
+
+    function toggleMobileMenu() {
+        console.log('toggleMobileMenu', isMobileMenuOpen);
+        isMobileMenuOpen = !isMobileMenuOpen;
+    }
+
+    onMount(() => {
+        // Close the mobile menu when a navigation link is clicked
+        const links = document.querySelectorAll('.nav-link');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                isMobileMenuOpen = false;
+            });
+        });
+    });
 </script>
 
 <header>
@@ -14,7 +32,7 @@
                         alt=''
                 />
             </a>
-            <button class='lg:hidden navbar-burger py-1 ml-auto'>
+            <button class='lg:hidden navbar-burger py-1 ml-auto' on:click={toggleMobileMenu}>
                 <svg
                         width={44}
                         height={16}
@@ -26,7 +44,7 @@
                     <rect y={14} width={44} height={2} rx={1} fill='black' />
                 </svg>
             </button>
-            <div class='hidden lg:flex ml-auto mr-12 items-center'>
+            <div class='{isMobileMenuOpen ? "flex" : "hidden"} lg:flex lg:ml-auto lg:mr-12 lg:items-center ld:flex-row flex-col'>
                 <a class='inline-block hover:underline mr-10' aria-current={$page.url.pathname === '/' ? 'page' : undefined} href="/static">
                     About
                 </a>
